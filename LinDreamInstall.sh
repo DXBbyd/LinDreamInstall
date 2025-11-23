@@ -81,7 +81,6 @@ notify "🎉 LinDream 安装成功！"
 echo -e "\n================================="
 echo "      LinDream 安装成功！"
 echo "=================================\n"
-echo "开始安装NapCat，进度将不在通知栏显示"
 clear
 
 MAGENTA='\033[0;1;35;95m'
@@ -119,8 +118,8 @@ execute_command "proot-distro install debian --override-alias napcat" "安装nap
 echo -e "${GREEN}正在初始化napcat容器...${NC}"
 init_cmd="apt update -y && \
 apt install -y sudo curl libgcrypt20 && \
-curl -o napcat.sh https://nclatest.znin.net/NapNeko/NapCat-Installer/main/script/install.sh&& \
-sudo bash install.sh --docker n --cli n && \
+curl -o napcat.sh https://nclatest.znin.net/NapNeko/NapCat-Installer/main/script/install.sh && \
+sudo bash napcat.sh --docker n --cli n && \
 apt autoremove -y && \
 apt clean && \
 rm -rf /tmp/* /var/lib/apt/lists"
@@ -130,8 +129,17 @@ if [ $? -ne 0 ]; then
     echo -e "${RED}napcat容器初始化失败。${NC}"
     exit 1
 fi
-echo "上面的不要看"
-echo "每次启动请执行以下步骤："
+echo -e "${RED}napcat容器安装成功, 上方信息无需关注, 请参考下方说明⬇${NC}"
+
+echo -e "\n安装完成, 请输入${GREEN} proot-distro sh napcat -- bash -c \"xvfb-run -a /root/Napcat/opt/QQ/qq --no-sandbox\" ${NC}命令启动。"
+echo -e "保持后台运行 请输入${GREEN} screen -dmS napcat bash -c 'proot-distro sh napcat -- bash -c \"xvfb-run -a /root/Napcat/opt/QQ/qq --no-sandbox\"'${NC}"
+echo -e "后台快速登录 请输入${GREEN} screen -dmS napcat bash -c 'proot-distro sh napcat -- bash -c \"xvfb-run -a /root/Napcat/opt/QQ/qq --no-sandbox -q QQ号码\"'${NC}"
+echo -e "进入容器内部 请输入${GREEN} proot-distro login napcat ${NC}"
+echo -e "容器数据位置${MAGENTA} /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/napcat${NC}"
+echo -e "Napcat安装位置(容器外真实路径)${MAGENTA} /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/napcat/root/Napcat/opt/QQ/resources/app/app_launcher/napcat${NC}"
+echo -e "注意, 您可以随时使用${GREEN}screen -r napcat${NC}来进入后台进程并使用${GREEN}ctrl + a + d${NC}离开(离开不会关闭后台进程)。"
+echo -e "${GREEN}WEB_UI访问密钥请查看 Napcat安装位置/config/webui.json ${NC}"
+echo "启动LinDream的步骤"
 echo
 echo "1. 进入项目目录："
 echo "   cd ~/LinDream"
@@ -141,13 +149,6 @@ echo "   source .venv/bin/activate"
 echo
 echo "3. 启动主程序："
 echo "   python main.py"
-echo "启动NapCat"
-echo -e "\n请输入${GREEN} proot-distro sh napcat -- bash -c \"xvfb-run -a /root/Napcat/opt/QQ/qq --no-sandbox\" ${NC}命令启动。"
-echo -e "保持后台运行 请输入${GREEN} screen -dmS napcat bash -c 'proot-distro sh napcat -- bash -c \"xvfb-run -a /root/Napcat/opt/QQ/qq --no-sandbox\"'${NC}"
-echo -e "后台快速登录 请输入${GREEN} screen -dmS napcat bash -c 'proot-distro sh napcat -- bash -c \"xvfb-run -a /root/Napcat/opt/QQ/qq --no-sandbox -q QQ号码\"'${NC}"
-echo -e "进入容器内部 请输入${GREEN} proot-distro login napcat ${NC}"
-echo -e "容器数据位置${MAGENTA} /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/napcat${NC}"
-echo -e "Napcat安装位置(容器外真实路径)${MAGENTA} /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/napcat/root/Napcat/opt/QQ/resources/app/app_launcher/napcat${NC}"
-echo -e "注意, 您可以随时使用${GREEN}screen -r napcat${NC}来进入后台进程并使用${GREEN}ctrl + a + d${NC}离开(离开不会关闭后台进程)。"
-echo -e "${GREEN}WEB_UI访问密钥请查看 Napcat安装位置/config/webui.json ${NC}"
-echo "安装脚本运行完成"
+echo
+
+echo "安装脚本已完成！"
