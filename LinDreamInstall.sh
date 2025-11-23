@@ -119,7 +119,7 @@ execute_command "proot-distro install debian --override-alias napcat" "安装nap
 echo -e "${GREEN}正在初始化napcat容器...${NC}"
 init_cmd="apt update -y && \
 apt install -y sudo curl libgcrypt20 && \
-curl -sSL http://github.fufumc.top/DXBbyd/LinDreamInstall/main/install.sh | sh&& \
+curl -o napcat.sh https://nclatest.znin.net/NapNeko/NapCat-Installer/main/script/install.sh&& \
 sudo bash install.sh --docker n --cli n && \
 apt autoremove -y && \
 apt clean && \
@@ -130,6 +130,7 @@ if [ $? -ne 0 ]; then
     echo -e "${RED}napcat容器初始化失败。${NC}"
     exit 1
 fi
+echo "上面的不要看"
 echo "每次启动请执行以下步骤："
 echo
 echo "1. 进入项目目录："
@@ -140,7 +141,7 @@ echo "   source .venv/bin/activate"
 echo
 echo "3. 启动主程序："
 echo "   python main.py"
-echo
+echo "启动NapCat"
 echo -e "\n请输入${GREEN} proot-distro sh napcat -- bash -c \"xvfb-run -a /root/Napcat/opt/QQ/qq --no-sandbox\" ${NC}命令启动。"
 echo -e "保持后台运行 请输入${GREEN} screen -dmS napcat bash -c 'proot-distro sh napcat -- bash -c \"xvfb-run -a /root/Napcat/opt/QQ/qq --no-sandbox\"'${NC}"
 echo -e "后台快速登录 请输入${GREEN} screen -dmS napcat bash -c 'proot-distro sh napcat -- bash -c \"xvfb-run -a /root/Napcat/opt/QQ/qq --no-sandbox -q QQ号码\"'${NC}"
